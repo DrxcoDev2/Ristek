@@ -10,10 +10,7 @@ public class MouseLook : MonoBehaviour
     private float xRotation = 0f;
     private float yRotation = 0f;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked; // Bloquea el cursor en la pantalla
-    }
+
 
     void Update()
     {
@@ -22,7 +19,7 @@ public class MouseLook : MonoBehaviour
 
         // Rotaci�n vertical (mirar arriba/abajo)
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limita la inclinaci�n de la c�mara
+        xRotation = Mathf.Clamp(xRotation, -360f, 90f); // Limita la inclinaci�n de la c�mara
 
         // Rotaci�n horizontal (mirar a los lados)
         yRotation += mouseX;

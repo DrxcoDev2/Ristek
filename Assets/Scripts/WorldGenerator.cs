@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    public GameObject blockPrefab; // Prefab de un cubo
-    public int width = 16;         // Ancho del chunk
-    public int height = 10;        // Altura m�xima del terreno
-    public float scale = 0.1f;     // Escala del ruido Perlin
+    public GameObject blockPrefab;         // Prefab de un cubo
+    public GameObject deepBlockPrefab;     // Prefab para los bloques debajo de la capa 5
+    public int width = 16;                 // Ancho del chunk
+    public int height = 10;                // Altura m�xima del terreno
+    public float scale = 0.1f;             // Escala del ruido Perlin
 
-    // A�adimos una semilla para cambiar la generaci�n de mundo
+    // A�adimos una semilla para cambiar la generaci�n del mundo
     public float seed = 0f;
 
     void Start()
@@ -21,7 +22,7 @@ public class WorldGenerator : MonoBehaviour
     {
         // Configuramos la semilla del ruido Perlin
         Random.InitState((int)seed);
-        
+
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < width; z++)
@@ -34,7 +35,18 @@ public class WorldGenerator : MonoBehaviour
                 for (int y = 0; y < terrainHeight; y++)
                 {
                     Vector3 pos = new Vector3(x, y, z);
-                    Instantiate(blockPrefab, pos, Quaternion.identity);
+                    
+                    // Cambiar el tipo de bloque dependiendo de la altura
+                    if (y >= 5)
+                    {
+                        // Usar un bloque diferente para capas debajo de la capa 5
+                        Instantiate(deepBlockPrefab, pos, Quaternion.identity);
+                    }
+                    else
+                    {
+                        // Usar el bloque normal para las capas superiores
+                        Instantiate(blockPrefab, pos, Quaternion.identity);
+                    }
                 }
             }
         }

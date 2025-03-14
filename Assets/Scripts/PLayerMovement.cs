@@ -13,10 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float groundDistance = 0.4f;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked; // Bloquea el cursor
-    }
+
 
     void Update()
     {
