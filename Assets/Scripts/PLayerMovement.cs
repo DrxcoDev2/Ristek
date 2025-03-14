@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-      public CharacterController controller;
+    public CharacterController controller;
     public float speed = 5f;
     public float gravity = -9.81f;
     public float jumpHeight = 1.5f;
@@ -22,12 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Comprobaci�n de si est� en el suelo
+        // Comprobar si est� tocando el suelo
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = -2f; // Reiniciar velocidad vertical para evitar acumulaci�n de gravedad
         }
 
         // Movimiento en X y Z
